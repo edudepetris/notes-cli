@@ -32,6 +32,7 @@ USAGE
 <!-- commands -->
 * [`notes hello [FILE]`](#notes-hello-file)
 * [`notes help [COMMAND]`](#notes-help-command)
+* [`notes init [FILE]`](#notes-init-file)
 
 ## `notes hello [FILE]`
 
@@ -69,4 +70,20 @@ OPTIONS
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.0/src/commands/help.ts)_
+
+## `notes init [FILE]`
+
+describe the command here
+
+```
+USAGE
+  $ notes init [FILE]
+
+OPTIONS
+  -f, --force
+  -h, --help       show CLI help
+  -n, --name=name  name to print
+```
+
+_See code: [src/commands/init.ts](https://github.com/edudepetris/notes-cli/blob/v0.0.0/src/commands/init.ts)_
 <!-- commandsstop -->

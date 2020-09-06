@@ -1,3 +1,4 @@
+--file test/spec-helper
 --require ts-node/register
 --watch-extensions ts
 --recursive

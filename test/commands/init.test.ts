@@ -3,28 +3,10 @@ import {expect, test} from '@oclif/test'
 import * as shell from 'shelljs'
 import * as path from 'path'
 
-const clean = () => {
-  shell.rm('-rf', '.devnotes')
-  shell.rm('.gitignore')
-}
-
-const setup = () => {
-  shell.config.silent = true
-
-  shell.cd('test/test_root_project')
-  clean()
-}
-
-const teardown = () => {
-  shell.config.silent = false
-  clean()
-  shell.cd('../../')
-}
-
-const addGitignore = () =>  shell.touch('.gitignore')
+const touchGitignore = () =>  shell.touch('.gitignore')
 
 const addNotesToGitignore = () => {
-  addGitignore()
+  touchGitignore()
   const toIgnore = new shell.ShellString('.devnotes')
   toIgnore.toEnd('.gitignore')
 }
@@ -32,8 +14,6 @@ const addNotesToGitignore = () => {
 describe('init', () => {
   test
   .stdout()
-  .do(setup)
-  .finally(teardown)
   .command(['init'])
   .it('runs init', _ctx => {
     expect(_ctx.stdout).to.contain('🤟 done!')
@@ -41,8 +21,6 @@ describe('init', () => {
 
   test
   .stdout()
-  .do(setup)
-  .finally(teardown)
   .command(['init'])
   .it('creates a .devnotes folder with notes.md', _ctx => {
     const filePath = path.join('.devnotes', 'notes.md')
@@ -54,8 +32,6 @@ describe('init', () => {
 
   test
   .stdout()
-  .do(setup)
-  .finally(teardown)
   .command(['init'])
   .it('notes.md has a basic template', _ctx => {
     const filePath = path.join('.devnotes', 'notes.md')
@@ -67,24 +43,19 @@ describe('init', () => {
   context('when .gitignore exists', () => {
     test
     .stdout()
-    .do(setup)
-    .finally(teardown)
-    .do(addGitignore)
+    .do(touchGitignore)
     .command(['init'])
-    .do(() => shell.touch('.gitignore'))
     .it('adds .devnotes to .gitignore', _ctx => {
-      const content = shell.cat('.gitignore')
+      const content = shell.cat('.gitignore').toString()
 
-      expect(content.toString()).to.contain('.devnotes')
+      expect(content).to.contain('.devnotes')
     })
   })
 
   context('when .gitignore exists and .devnotes is included', () => {
     test
     .stdout()
-    .do(setup)
     .do(addNotesToGitignore)
-    .finally(teardown)
     .command(['init'])
     .it('does not add it again', _ctx => {
       const content = shell.cat('.gitignore').toString()

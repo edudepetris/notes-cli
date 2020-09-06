@@ -19,7 +19,6 @@ export default class Init extends Command {
     shell.touch(filePath)
 
     if (hasGitignore) {
-      // if .gitignore already has .devnotes don't add it again.
       const gitignore = shell.cat('.gitignore').toString()
       const hasDevnotes = gitignore.includes('.devnotes')
 

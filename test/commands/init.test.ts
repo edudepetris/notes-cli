@@ -5,6 +5,11 @@ import * as path from 'path'
 
 const touchGitignore = () =>  shell.touch('.gitignore')
 
+const touchGitignoreNoPermission = () => {
+  touchGitignore()
+  shell.chmod('-w', '.gitignore')
+}
+
 const addNotesToGitignore = () => {
   touchGitignore()
   const toIgnore = new shell.ShellString('.devnotes')
@@ -61,6 +66,24 @@ describe('init', () => {
       const content = shell.cat('.gitignore').toString()
 
       expect('.devnotes').to.equal(content)
+    })
+  })
+
+  // failing on CI
+  context('when .gitignore exists but I do not have permissions', () => {
+    test
+    .skip()
+    .stderr()
+    .do(touchGitignoreNoPermission)
+    .do(() => {
+      shell.config.silent = false
+    })
+    .finally(() => {
+      shell.config.silent = true
+    })
+    .command(['init'])
+    .it('shows a message on stderr', ctx => {
+      expect(ctx.stderr).to.contain('could not append to file (code EACCES): .gitignore')
     })
   })
 })

@@ -1,7 +1,7 @@
 import {expect, test} from '@oclif/test'
-
 import * as shell from 'shelljs'
-import * as path from 'path'
+
+import {rootDir, notesFilePath} from '../../src/utils/constants'
 
 const touchGitignore = () =>  shell.touch('.gitignore')
 
@@ -12,7 +12,7 @@ const touchGitignoreNoPermission = () => {
 
 const addNotesToGitignore = () => {
   touchGitignore()
-  const toIgnore = new shell.ShellString('.devnotes')
+  const toIgnore = new shell.ShellString(rootDir)
   toIgnore.toEnd('.gitignore')
 }
 
@@ -20,29 +20,27 @@ describe('init', () => {
   test
   .stdout()
   .command(['init'])
-  .it('runs init', _ctx => {
-    expect(_ctx.stdout).to.contain('🤟 done!')
+  .it('runs init', ctx => {
+    expect(ctx.stdout).to.contain('🤟 done!')
   })
 
   test
   .stdout()
   .command(['init'])
   .it('creates a .devnotes folder with notes.md', _ctx => {
-    const filePath = path.join('.devnotes', 'notes.md')
-    const file = shell.ls('-A', filePath)
+    const file = shell.ls('-A', notesFilePath)
 
     expect(file).to.have.length(1)
-    expect(file[0]).to.contain(filePath)
+    expect(file[0]).to.contain(notesFilePath)
   })
 
   test
   .stdout()
   .command(['init'])
   .it('notes.md has a basic template', _ctx => {
-    const filePath = path.join('.devnotes', 'notes.md')
-    const content = shell.cat(filePath)
+    const content = shell.cat(notesFilePath).toString()
 
-    expect(content.toString()).to.contain('')
+    expect(content).to.contain('')
   })
 
   context('when .gitignore exists', () => {
@@ -53,7 +51,7 @@ describe('init', () => {
     .it('adds .devnotes to .gitignore', _ctx => {
       const content = shell.cat('.gitignore').toString()
 
-      expect(content).to.contain('.devnotes')
+      expect(content).to.contain(rootDir)
     })
   })
 
@@ -65,7 +63,7 @@ describe('init', () => {
     .it('does not add it again', _ctx => {
       const content = shell.cat('.gitignore').toString()
 
-      expect('.devnotes').to.equal(content)
+      expect(rootDir).to.equal(content)
     })
   })
 

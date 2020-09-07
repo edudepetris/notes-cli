@@ -1,7 +1,8 @@
 import * as shell from 'shelljs'
+import {rootDir} from '../src/utils/constants'
 
 const clean = () => {
-  shell.rm('-rf', '.devnotes', '.gitignore')
+  shell.rm('-rf', rootDir, '.gitignore')
 }
 
 const cdProjectTestRoot = () => {

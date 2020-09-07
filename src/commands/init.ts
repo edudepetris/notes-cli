@@ -1,9 +1,22 @@
 import * as shell from 'shelljs'
 import {Command, flags} from '@oclif/command'
+import * as fs from 'fs'
 
 import {rootDir, notesFilePath} from '../utils/constants'
 
 const SUCCESS = 0
+
+const checkPermission = (ctx: any) => {
+  try {
+    fs.accessSync('.', fs.constants.W_OK)
+  } catch (_) {
+    const pwd = shell.pwd().toString()
+    const error = `Permission denied for creation on ${pwd}`
+    const suggestion = `give write permission to ${pwd}`
+
+    ctx.error(error, {exit: 1, suggestions: [suggestion]})
+  }
+}
 
 const createStructure = () => {
   shell.mkdir('-p', rootDir)
@@ -35,6 +48,7 @@ export default class Init extends Command {
   }
 
   async run() {
+    checkPermission(this)
     createStructure()
     addToGitignore()
 

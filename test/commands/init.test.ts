@@ -84,4 +84,25 @@ describe('init', () => {
       expect(ctx.stderr).to.contain('could not append to file (code EACCES): .gitignore')
     })
   })
+
+  context('when I do not have write permission on current path', () => {
+    test
+    .skip()
+    .stdout()
+    .do(() => {
+      shell.chmod('-w', '.')
+    })
+    .do(() => {
+      shell.config.silent = false
+    })
+    .finally(() => {
+      shell.config.silent = true
+    })
+    .finally(() => {
+      shell.chmod('+w', '.')
+    })
+    .command(['init'])
+    .exit(1)
+    .it('Permission denied for creation on')
+  })
 })

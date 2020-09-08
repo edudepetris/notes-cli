@@ -10,6 +10,7 @@
     "@oclif/command": "^1",
     "@oclif/config": "^1",
     "@oclif/plugin-help": "^3",
+    "@oclif/plugin-not-found": "^1.2.4",
     "tslib": "^1"
   },
   "devDependencies": {
@@ -49,7 +50,8 @@
     "commands": "./lib/commands",
     "bin": "notes",
     "plugins": [
-      "@oclif/plugin-help"
+      "@oclif/plugin-help",
+      "@oclif/plugin-not-found"
     ]
   },
   "repository": "edudepetris/notes-cli",

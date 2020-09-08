@@ -17,11 +17,11 @@ notes-cli
 # Usage
 <!-- usage -->
 ```sh-session
-$ npm install -g notes-cli
+$ npm install -g devnotes-cli
 $ notes COMMAND
 running command...
 $ notes (-v|--version|version)
-notes-cli/0.0.1 darwin-x64 node-v12.18.0
+devnotes-cli/0.0.1 darwin-x64 node-v12.18.0
 $ notes --help [COMMAND]
 USAGE
   $ notes COMMAND

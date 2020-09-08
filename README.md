@@ -21,7 +21,7 @@ $ npm install -g devnotes-cli
 $ notes COMMAND
 running command...
 $ notes (-v|--version|version)
-devnotes-cli/0.0.1 darwin-x64 node-v12.18.0
+devnotes-cli/0.0.2 darwin-x64 node-v12.18.0
 $ notes --help [COMMAND]
 USAGE
   $ notes COMMAND
@@ -62,5 +62,5 @@ OPTIONS
   -h, --help  show CLI help
 ```
 
-_See code: [src/commands/init.ts](https://github.com/edudepetris/notes-cli/blob/v0.0.1/src/commands/init.ts)_
+_See code: [src/commands/init.ts](https://github.com/edudepetris/notes-cli/blob/v0.0.2/src/commands/init.ts)_
 <!-- commandsstop -->

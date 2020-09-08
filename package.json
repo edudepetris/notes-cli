@@ -1,5 +1,5 @@
 {
-  "name": "notes-cli",
+  "name": "devnotes-cli",
   "version": "0.0.1",
   "author": "Edu Depetris @edudepetris",
   "bin": {

@@ -21,7 +21,7 @@ $ npm install -g notes-cli
 $ notes COMMAND
 running command...
 $ notes (-v|--version|version)
-notes-cli/0.0.0 darwin-x64 node-v12.18.0
+notes-cli/0.0.1 darwin-x64 node-v12.18.0
 $ notes --help [COMMAND]
 USAGE
   $ notes COMMAND
@@ -33,19 +33,6 @@ USAGE
 * [`notes help [COMMAND]`](#notes-help-command)
 * [`notes init`](#notes-init)
 
-## `notes init`
-
-describe the command here
-
-```
-USAGE
-  $ notes init
-
-OPTIONS
-  -h, --help       show CLI help
-```
-
-_See code: [src/commands/init.ts](https://github.com/edudepetris/notes-cli/blob/v0.0.0/src/commands/init.ts)_
 ## `notes help [COMMAND]`
 
 display help for notes
@@ -62,4 +49,18 @@ OPTIONS
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.0/src/commands/help.ts)_
+
+## `notes init`
+
+Create an empty Notes repository or reinitialize an existing one.
+
+```
+USAGE
+  $ notes init
+
+OPTIONS
+  -h, --help  show CLI help
+```
+
+_See code: [src/commands/init.ts](https://github.com/edudepetris/notes-cli/blob/v0.0.1/src/commands/init.ts)_
 <!-- commandsstop -->

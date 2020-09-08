@@ -1,6 +1,6 @@
 {
   "name": "notes-cli",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "author": "Edu Depetris @edudepetris",
   "bin": {
     "notes": "./bin/run"

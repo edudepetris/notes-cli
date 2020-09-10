@@ -12,8 +12,8 @@
     "@oclif/plugin-help": "^3",
     "@oclif/plugin-not-found": "^1.2.4",
     "@types/shelljs": "^0.8.8",
-    "tslib": "^1",
-    "shelljs": "^0.8.4"
+    "shelljs": "^0.8.4",
+    "tslib": "^1"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1",
@@ -21,6 +21,7 @@
     "@types/chai": "^4",
     "@types/mocha": "^5",
     "@types/node": "^10",
+    "aws-sdk": "^2.747.0",
     "chai": "^4",
     "eslint": "^5.13",
     "eslint-config-oclif": "^3.1",
@@ -52,7 +53,16 @@
     "plugins": [
       "@oclif/plugin-help",
       "@oclif/plugin-not-found"
-    ]
+    ],
+    "update": {
+      "s3": {
+        "bucket": "devnotes-cli"
+      }
+    },
+    "macos": {
+      "identifier": "com.devnotes.cli",
+      "sign": "Eduardo Depetris"
+    }
   },
   "repository": "edudepetris/notes-cli",
   "scripts": {

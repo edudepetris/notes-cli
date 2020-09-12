@@ -1,8 +1,10 @@
-import * as shell from 'shelljs'
 import {Command, flags} from '@oclif/command'
+import * as shell from 'shelljs'
 import * as fs from 'fs'
+import * as path from 'path'
 
-import {rootDir, notesFilePath} from '../utils/constants'
+import {rootDir, notesFilePath, configFilePath} from '../utils/constants'
+import { string } from '@oclif/command/lib/flags'
 
 const SUCCESS = 0
 
@@ -21,6 +23,23 @@ const checkPermission = (ctx: any) => {
 const createStructure = () => {
   shell.mkdir('-p', rootDir)
   shell.touch(notesFilePath)
+  shell.touch(configFilePath)
+}
+
+const identifyProject = () => {
+  const currentPath = shell.pwd().toString()
+  const name = currentPath.split(path.sep).pop()
+
+  const data = {
+    project: {
+      name
+    }
+  }
+
+  const stringData = JSON.stringify(data)
+
+  const identity = new shell.ShellString(stringData)
+  identity.toEnd(configFilePath)
 }
 
 const addToGitignore = () => {
@@ -50,6 +69,7 @@ export default class Init extends Command {
   async run() {
     checkPermission(this)
     createStructure()
+    identifyProject()
     addToGitignore()
 
     this.log('🤟 done!')

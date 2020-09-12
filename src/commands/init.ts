@@ -4,7 +4,6 @@ import * as fs from 'fs'
 import * as path from 'path'
 
 import {rootDir, notesFilePath, configFilePath} from '../utils/constants'
-import { string } from '@oclif/command/lib/flags'
 
 const SUCCESS = 0
 

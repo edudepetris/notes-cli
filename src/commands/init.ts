@@ -31,8 +31,8 @@ const identifyProject = () => {
 
   const data = {
     project: {
-      name
-    }
+      name,
+    },
   }
 
   const stringData = JSON.stringify(data)

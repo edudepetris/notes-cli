@@ -115,7 +115,7 @@ describe('init', () => {
     .command(['init'])
     .it('creates a config.json with the project name', _ctx => {
       const content = shell.cat(configFilePath).toString()
-      const expected = JSON.stringify({ name: 'test_root_project' })
+      const expected = JSON.stringify({name: 'test_root_project'})
 
       expect(content).to.contain(expected)
     })

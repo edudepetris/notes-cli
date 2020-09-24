@@ -32,6 +32,7 @@ USAGE
 <!-- commands -->
 * [`notes help [COMMAND]`](#notes-help-command)
 * [`notes init`](#notes-init)
+* [`notes login`](#notes-login)
 
 ## `notes help [COMMAND]`
 
@@ -63,4 +64,19 @@ OPTIONS
 ```
 
 _See code: [src/commands/init.ts](https://github.com/edudepetris/notes-cli/blob/v0.0.2/src/commands/init.ts)_
+
+## `notes login`
+
+Insert yours Devnotes credentials.
+
+```
+USAGE
+  $ notes login
+
+OPTIONS
+  -f, --force
+  -h, --help       show CLI help
+```
+
+_See code: [src/commands/login.ts](https://github.com/edudepetris/notes-cli/blob/v0.0.2/src/commands/login.ts)_
 <!-- commandsstop -->

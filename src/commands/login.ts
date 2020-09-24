@@ -6,13 +6,9 @@ export default class Login extends Command {
 
   static flags = {
     help: flags.help({char: 'h'}),
-    // flag with no value (-f, --force)
-    force: flags.boolean({char: 'f'}),
   }
 
   async run() {
-    const {flags} = this.parse(Login)
-
     const email = await cli.prompt('Email')
     const password = await cli.prompt('Password', {type: 'hide'})
 

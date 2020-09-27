@@ -1,5 +1,8 @@
 import {Command, flags} from '@oclif/command'
+import * as fs from 'fs-extra'
+import * as path from 'path'
 import cli from 'cli-ux'
+import {login} from '../utils/api'
 
 export default class Login extends Command {
   static description = 'login with yours Devnotes credentials'
@@ -11,14 +14,28 @@ export default class Login extends Command {
   async run() {
     const email = await cli.prompt('Email')
     const password = await cli.prompt('Password', {type: 'hide'})
+    const user = {user: {email, password}}
 
     cli.action.start('Logging in')
-    // login actions here ...
-    await cli.wait(3000)
+
+    // destructuring.
+    const response = await login(user)
+
+    if (response.status === 401) {
+      this.warn(response.data.message)
+      this.exit(1)
+    }
+
+    // save the credentials on cofig.
+    // auth.set(ctx, {email, token})
+    const config = path.join(this.config.configDir, 'config.json')
+    await fs.ensureDir(this.config.configDir)
+    await fs.writeJson(config, {
+      email: email,
+      token: response.headers.authorization,
+    })
 
     cli.action.stop()
-
-    // add green color to email.
     this.log(`Logged in as: ${email}`)
   }
 }

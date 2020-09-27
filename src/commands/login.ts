@@ -19,10 +19,10 @@ export default class Login extends Command {
     cli.action.start('Logging in')
 
     // destructuring.
-    const response = await login(user)
+    const {status, data, headers} = await login(user)
 
-    if (response.status === 401) {
-      this.warn(response.data.message)
+    if (status === 401) {
+      this.warn(data.message)
       this.exit(1)
     }
 
@@ -32,7 +32,7 @@ export default class Login extends Command {
     await fs.ensureDir(this.config.configDir)
     await fs.writeJson(config, {
       email: email,
-      token: response.headers.authorization,
+      token: headers.authorization,
     })
 
     cli.action.stop()

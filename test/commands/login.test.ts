@@ -1,6 +1,8 @@
 import {expect, test} from '@oclif/test'
 import cli from 'cli-ux'
 import * as api from '../../src/utils/api'
+import * as fs from 'fs-extra'
+import * as path from 'path'
 
 const success = {status: 200, headers: {authorization: 'token'}}
 const fail = {status: 401, data: {message: 'bad credentials'}}
@@ -8,14 +10,14 @@ const fail = {status: 401, data: {message: 'bad credentials'}}
 describe('login', () => {
   context('success logged in', () => {
     test
-    .skip()
     .stdout()
     .stub(cli, 'prompt', () => async () => 'yoda@devnotes.com')
     .stub(api, 'login', () => (success))
     .command(['login'])
-    .it('saves user credentials', ctx => {
-      // I can read the global config using a custom module.
-      expect(ctx.stdout).to.contain('Logged in as: yoda@devnotes.com')
+    .it('saves user credentials', async ctx => {
+      const configPath = path.join(ctx.config.configDir, 'config.json')
+      const config = await fs.readJson(configPath)
+      expect(config).to.include({email: 'yoda@devnotes.com', token: 'token'})
     })
 
     test

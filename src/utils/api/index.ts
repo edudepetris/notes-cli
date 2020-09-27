@@ -14,14 +14,14 @@ const defaultHeaders = () => ({
 
 // defines whether to resolve or reject the promise for a given
 // HTTP response status code.
-const validateStatus = status => {
+const validateStatus = (status: any) => {
   return status < 500
 }
 
 // Config
 axios.defaults.baseURL = baseUrl()
 axios.defaults.headers = defaultHeaders()
-axios.validateStatus = validateStatus
+axios.defaults.validateStatus = validateStatus
 
 const login = async (user: any) => {
   try {

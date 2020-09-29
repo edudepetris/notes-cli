@@ -12,7 +12,7 @@ const defaultHeaders = () => ({
   Accept: 'application/json',
 })
 
-// defines whether to resolve or reject the promise for a given
+// It defines whether to resolve or reject the promise for a given
 // HTTP response status code.
 const validateStatus = (status: any) => {
   return status < 500
@@ -23,18 +23,9 @@ axios.defaults.baseURL = baseUrl()
 axios.defaults.headers = defaultHeaders()
 axios.defaults.validateStatus = validateStatus
 
-const login = async (user: any) => {
-  try {
-    return await axios.post('/v1/users/sign_in', user)
-  } catch (error) {
-    // outside >= 500
-    return error.response
-  }
-}
+const login = (user: any) => (axios.post('/v1/users/sign_in', user))
 
-const logout = () => {
-  // console.log('logout')
-}
+const logout = (headers: any) => (axios.delete('/v1/users/sign_out', {headers}))
 
 export {
   login,

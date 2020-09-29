@@ -18,7 +18,6 @@ export default class Login extends Command {
 
     cli.action.start('Logging in')
 
-    // destructuring.
     const {status, data, headers} = await login(user)
 
     if (status === 401) {

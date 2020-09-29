@@ -28,7 +28,7 @@ describe('login', () => {
       })
     })
     .command(['logout'])
-    .it('removes user credentials', async (ctx) => {
+    .it('removes user credentials', async ctx => {
       const configPath = path.join(ctx.config.configDir, 'config.json')
 
       const config = await fs.readJson(configPath)

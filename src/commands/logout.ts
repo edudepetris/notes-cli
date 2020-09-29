@@ -22,7 +22,7 @@ export default class Logout extends Command {
     const token = config.token
 
     const headers = {
-      'Authorization': token
+      Authorization: token,
     }
 
     await logout(headers)

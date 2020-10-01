@@ -32,6 +32,8 @@ USAGE
 <!-- commands -->
 * [`notes help [COMMAND]`](#notes-help-command)
 * [`notes init`](#notes-init)
+* [`notes login`](#notes-login)
+* [`notes logout`](#notes-logout)
 
 ## `notes help [COMMAND]`
 
@@ -63,4 +65,32 @@ OPTIONS
 ```
 
 _See code: [src/commands/init.ts](https://github.com/edudepetris/notes-cli/blob/v0.0.2/src/commands/init.ts)_
+
+## `notes login`
+
+login with yours Devnotes credentials
+
+```
+USAGE
+  $ notes login
+
+OPTIONS
+  -h, --help   show CLI help
+```
+
+_See code: [src/commands/login.ts](https://github.com/edudepetris/notes-cli/blob/v0.0.2/src/commands/login.ts)_
+
+## `notes logout`
+
+clears local login credentials and invalidates API session
+
+```
+USAGE
+  $ notes logout
+
+OPTIONS
+  -h, --help       show CLI help
+```
+
+_See code: [src/commands/logout.ts](https://github.com/edudepetris/notes-cli/blob/v0.0.2/src/commands/logout.ts)_
 <!-- commandsstop -->

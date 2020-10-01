@@ -27,7 +27,7 @@ export default class Login extends Command {
     const store = new GlobalStore(this)
     store.setAuth({
       email,
-      token: headers.authorization
+      token: headers.authorization,
     })
 
     cli.action.stop()

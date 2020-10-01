@@ -4,14 +4,15 @@ import {globalConfigFileName} from '../constants'
 
 class GlobalStore {
   ctx: any
-  #path: string 
+
+  #path: string
 
   constructor(ctx: any) {
-    this.ctx = ctx;
-    
+    this.ctx = ctx
+
     this.#path = path.join(
       this.ctx.config.configDir,
-      globalConfigFileName
+      globalConfigFileName,
     )
 
     fs.ensureFile(this.#path)
@@ -20,8 +21,7 @@ class GlobalStore {
   async setAuth(userAuth: any) {
     try {
       await fs.writeJson(this.#path, userAuth)
-    }
-    catch {
+    } catch {
       return false
     }
 
@@ -34,11 +34,9 @@ class GlobalStore {
 
       return {
         email: config.email,
-        token: config.token
+        token: config.token,
       }
-
-    }
-    catch {
+    } catch {
       return {}
     }
   }

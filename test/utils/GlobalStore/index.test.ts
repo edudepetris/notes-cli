@@ -6,30 +6,31 @@ import {globalConfigFileName} from '../../../src/utils/constants'
 
 import * as path from 'path'
 import * as fs from 'fs-extra'
-import { fdatasync } from 'fs'
 
 const ctx = {
   config: {
     configDir: '../../test_root_project/global_config/',
-  }
+  },
 }
 const configPath = path.join(ctx.config.configDir, globalConfigFileName)
 
 describe('GlobalStore', () => {
   const data = {email: 'yoda@devnotes.com', token: 'token'}
 
+  /* eslint-disable no-new */
   it('ensures a global config file', async () => {
-    const store = new GlobalStore(ctx)
+    new GlobalStore(ctx)
     const exists = await fs.pathExists(configPath)
 
     expect(exists).to.be.true
   })
+  /* eslint-enable no-new */
 
   context('User auth', () => {
     describe('#setAuth', () => {
       it('saves data in global config file', async () => {
         const store = new GlobalStore(ctx)
-        const result = await store.setAuth(data)
+        await store.setAuth(data)
 
         const {email, token} = await fs.readJSON(configPath)
 
@@ -56,7 +57,6 @@ describe('GlobalStore', () => {
     })
     describe('#getAuth', () => {
       it('returns from global config file', async () => {
-
         sinon.stub(fs, 'readJson').resolves(data)
 
         const store = new GlobalStore(ctx)

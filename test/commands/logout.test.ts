@@ -22,8 +22,8 @@ describe('login', () => {
 
       const ctx = {
         config: {
-          configDir
-        }
+          configDir,
+        },
       }
 
       const store = new GlobalStore(ctx)

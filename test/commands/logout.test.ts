@@ -27,6 +27,7 @@ describe('login', () => {
       }
 
       const store = new GlobalStore(ctx)
+      await store.init()
 
       store.setAuth({
         email: 'yoda@devnotes.com',
@@ -36,6 +37,7 @@ describe('login', () => {
     .command(['logout'])
     .it('removes user credentials', async ctx => {
       const store = new GlobalStore(ctx)
+      await store.init()
 
       const config = await store.getAuth()
       expect(config).to.include({email: '', token: ''})

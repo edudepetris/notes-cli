@@ -2,6 +2,12 @@ import * as fs from 'fs-extra'
 import * as path from 'path'
 import {globalConfigFileName} from '../constants'
 
+// Example
+//
+//     // initialization.
+//     const store = new GlobalStore(ctx)
+//     await store.init()
+//
 class GlobalStore {
   ctx: any
 

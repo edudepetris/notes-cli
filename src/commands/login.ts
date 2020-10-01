@@ -1,8 +1,7 @@
 import {Command, flags} from '@oclif/command'
-import * as fs from 'fs-extra'
-import * as path from 'path'
 import cli from 'cli-ux'
 import {login} from '../utils/api'
+import GlobalStore from '../utils/GlobalStore'
 
 export default class Login extends Command {
   static description = 'login with yours Devnotes credentials'
@@ -25,13 +24,10 @@ export default class Login extends Command {
       this.exit(1)
     }
 
-    // save the credentials on cofig.
-    // auth.set(ctx, {email, token})
-    const config = path.join(this.config.configDir, 'config.json')
-    await fs.ensureDir(this.config.configDir)
-    await fs.writeJson(config, {
-      email: email,
-      token: headers.authorization,
+    const store = new GlobalStore(this)
+    store.setAuth({
+      email,
+      token: headers.authorization
     })
 
     cli.action.stop()

@@ -1,8 +1,7 @@
 import {expect, test} from '@oclif/test'
 import * as api from '../../src/utils/api'
-import * as fs from 'fs-extra'
-import * as path from 'path'
 
+import GlobalStore from '../../src/utils/GlobalStore'
 import * as Config from '@oclif/config'
 
 const success = {status: 200}
@@ -18,20 +17,27 @@ describe('login', () => {
       // It doesn't looks good. The config has the wrong ctx,
       // cause of that I need to do this workaround.
       const config = await Config.load()
-      const wrongConfigPath = path.join(config.configDir, 'config.json')
       const dirname = config.dirname
-      const configPath = wrongConfigPath.replace(dirname, 'devnotes-cli')
+      const configDir = config.configDir.replace(dirname, 'devnotes-cli')
 
-      await fs.writeJson(configPath, {
+      const ctx = {
+        config: {
+          configDir
+        }
+      }
+
+      const store = new GlobalStore(ctx)
+
+      store.setAuth({
         email: 'yoda@devnotes.com',
         token: 'token',
       })
     })
     .command(['logout'])
     .it('removes user credentials', async ctx => {
-      const configPath = path.join(ctx.config.configDir, 'config.json')
+      const store = new GlobalStore(ctx)
 
-      const config = await fs.readJson(configPath)
+      const config = await store.getAuth()
       expect(config).to.include({email: '', token: ''})
     })
   })

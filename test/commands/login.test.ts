@@ -1,8 +1,7 @@
 import {expect, test} from '@oclif/test'
 import cli from 'cli-ux'
+import GlobalStore from '../../src/utils/GlobalStore'
 import * as api from '../../src/utils/api'
-import * as fs from 'fs-extra'
-import * as path from 'path'
 
 const success = {status: 200, headers: {authorization: 'token'}}
 const fail = {status: 401, data: {message: 'bad credentials'}}
@@ -15,9 +14,10 @@ describe('login', () => {
     .stub(api, 'login', () => (success))
     .command(['login'])
     .it('saves user credentials', async ctx => {
-      const configPath = path.join(ctx.config.configDir, 'config.json')
-      const config = await fs.readJson(configPath)
-      expect(config).to.include({email: 'yoda@devnotes.com', token: 'token'})
+      const store = new GlobalStore(ctx)
+      const auth = await store.getAuth()
+
+      expect(auth).to.include({email: 'yoda@devnotes.com', token: 'token'})
     })
 
     test

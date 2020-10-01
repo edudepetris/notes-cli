@@ -1,8 +1,7 @@
 import {Command, flags} from '@oclif/command'
 import cli from 'cli-ux'
-import * as fs from 'fs-extra'
-import * as path from 'path'
 import {logout} from '../utils/api'
+import GlobalStore from '../utils/GlobalStore'
 
 export default class Logout extends Command {
   static description = 'clears local login credentials and invalidates API session'
@@ -14,25 +13,18 @@ export default class Logout extends Command {
   async run() {
     cli.action.start('Logging out')
 
-    // we can create this file during the init.
-    const configPath = path.join(this.config.configDir, 'config.json')
+    const store = new GlobalStore(this)
 
-    const config = await fs.readJson(configPath)
-    const email = config.email
-    const token = config.token
+    const {email, token} = await store.getAuth()
 
     const headers = {
       Authorization: token,
     }
 
-    await logout(headers)
+    logout(headers)
 
     // remove user credentials.
-    await fs.ensureDir(this.config.configDir)
-    await fs.writeJson(configPath, {
-      email: '',
-      token: '',
-    })
+    await store.setAuth({email: '', token: ''})
 
     cli.action.stop()
     this.log(`Logged out as: ${email}`)

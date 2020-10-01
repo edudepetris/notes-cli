@@ -14,15 +14,21 @@ class GlobalStore {
       this.ctx.config.configDir,
       globalConfigFileName,
     )
+  }
 
-    fs.ensureFile(this.#path)
+  async init() {
+    await fs.ensureFile(this.#path)
   }
 
   async setAuth(userAuth: any) {
     try {
       await fs.writeJson(this.#path, userAuth)
-    } catch {
-      return false
+    } catch (error) {
+      if (error.code === 'ENOENT') {
+        throw new Error('missing call init()')
+      }
+
+      throw error
     }
 
     return true
@@ -36,8 +42,12 @@ class GlobalStore {
         email: config.email,
         token: config.token,
       }
-    } catch {
-      return {}
+    } catch (error) {
+      if (error.code === 'ENOENT') {
+        throw new Error('missing call init()')
+      }
+
+      throw error
     }
   }
 }

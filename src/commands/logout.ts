@@ -14,6 +14,7 @@ export default class Logout extends Command {
     cli.action.start('Logging out')
 
     const store = new GlobalStore(this)
+    await store.init()
 
     const {email, token} = await store.getAuth()
 

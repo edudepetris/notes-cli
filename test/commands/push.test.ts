@@ -98,7 +98,7 @@ describe('push', () => {
     .do(createDummyProject)
     .command(['push'])
     .exit(1)
-    .it('exits with a message', _ => {
+    .it('exits with a message', ctx => {
       expect(ctx.stderr).to.include('login is required')
     })
   })

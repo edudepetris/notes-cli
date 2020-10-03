@@ -1,5 +1,5 @@
 import {expect} from '@oclif/test'
-import {configFilePath, notesFilePath} from '../../../src/utils/constants'
+import {localConfigFilePath, notesFilePath} from '../../../src/utils/constants'
 import * as fs from 'fs-extra'
 import {getProject, setProject, getNotes} from '../../../src/utils/localStore'
 
@@ -12,20 +12,20 @@ describe('localStore', () => {
     },
   }
 
-  beforeEach(() => fs.ensureFileSync(configFilePath))
+  beforeEach(() => fs.ensureFileSync(localConfigFilePath))
 
   describe('getProject', () => {
     it('returns the project', async () => {
       // We need dummy data on
       // ./devnotes/config.json
-      fs.writeJsonSync(configFilePath, dummy)
+      fs.writeJsonSync(localConfigFilePath, dummy)
 
       expect(getProject()).to.contain(dummy.project)
     })
     it('returns {} when no data', () => {
       // We need dummy data on
       // ./devnotes/config.json
-      fs.writeJsonSync(configFilePath, {})
+      fs.writeJsonSync(localConfigFilePath, {})
 
       expect(getProject()).to.be.empty
     })
@@ -35,7 +35,7 @@ describe('localStore', () => {
     it('returns the new project', () => {
       // We need dummy data on
       // ./devnotes/config.json
-      fs.writeJsonSync(configFilePath, dummy)
+      fs.writeJsonSync(localConfigFilePath, dummy)
       const fresh = setProject({name: 'fresh'})
 
       expect(fresh).to.contain({name: 'fresh'})
@@ -45,10 +45,10 @@ describe('localStore', () => {
 
       // We need dummy data on
       // ./devnotes/config.json
-      fs.writeJsonSync(configFilePath, dummy)
+      fs.writeJsonSync(localConfigFilePath, dummy)
 
       setProject({name: 'fresh'})
-      const data = fs.readJsonSync(configFilePath)
+      const data = fs.readJsonSync(localConfigFilePath)
 
       expect(data.project).to.contain(expected)
     })

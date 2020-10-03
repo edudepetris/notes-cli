@@ -1,24 +1,24 @@
 import * as fs from 'fs-extra'
-import {configFilePath, notesFilePath} from '../constants'
+import {localConfigFilePath, notesFilePath} from '../constants'
 
 // wrapper for manipulate data on
 //  .devnotes/config.json
 //  .devnotes/notes.md
 
 const getProject = (): any => {
-  fs.ensureFileSync(configFilePath)
+  fs.ensureFileSync(localConfigFilePath)
 
-  const localStoreData = fs.readJsonSync(configFilePath)
+  const localStoreData = fs.readJsonSync(localConfigFilePath)
   return localStoreData.project || {}
 }
 
 const setProject = (project: any) => {
-  fs.ensureFileSync(configFilePath)
+  fs.ensureFileSync(localConfigFilePath)
 
-  const data = fs.readJsonSync(configFilePath)
+  const data = fs.readJsonSync(localConfigFilePath)
   const fresh = {...data.project, ...project}
 
-  fs.writeJsonSync(configFilePath, {
+  fs.writeJsonSync(localConfigFilePath, {
     ...data,
     project: fresh,
   })

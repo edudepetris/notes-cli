@@ -1,6 +1,6 @@
 import {expect, test} from '@oclif/test'
 import * as fs from 'fs-extra'
-import {configFilePath, notesFilePath} from '../../src/utils/constants'
+import {localConfigFilePath, notesFilePath} from '../../src/utils/constants'
 import * as api from '../../src/utils/api'
 import {getProject} from '../../src/utils/localStore'
 import GlobalStore from '../../src/utils/GlobalStore'
@@ -40,8 +40,8 @@ const createDummyProject = (opts?: any) => {
     },
   })
 
-  fs.ensureFileSync(configFilePath)
-  fs.writeJsonSync(configFilePath, dummy)
+  fs.ensureFileSync(localConfigFilePath)
+  fs.writeJsonSync(localConfigFilePath, dummy)
 
   // create fake content.
   fs.ensureFileSync(notesFilePath)

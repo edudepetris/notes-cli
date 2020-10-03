@@ -3,7 +3,7 @@ import * as shell from 'shelljs'
 import * as fs from 'fs'
 import * as path from 'path'
 
-import {rootDir, notesFilePath, configFilePath} from '../utils/constants'
+import {rootDir, notesFilePath, localConfigFilePath} from '../utils/constants'
 
 const SUCCESS = 0
 
@@ -22,7 +22,7 @@ const checkPermission = (ctx: any) => {
 const createStructure = () => {
   shell.mkdir('-p', rootDir)
   shell.touch(notesFilePath)
-  shell.touch(configFilePath)
+  shell.touch(localConfigFilePath)
 }
 
 const identifyProject = () => {
@@ -38,7 +38,7 @@ const identifyProject = () => {
   const stringData = JSON.stringify(data)
 
   const identity = new shell.ShellString(stringData)
-  identity.toEnd(configFilePath)
+  identity.toEnd(localConfigFilePath)
 }
 
 const addToGitignore = () => {

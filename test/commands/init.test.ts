@@ -1,7 +1,7 @@
 import {expect, test} from '@oclif/test'
 import * as shell from 'shelljs'
 
-import {rootDir, notesFilePath, configFilePath} from '../../src/utils/constants'
+import {rootDir, notesFilePath, localConfigFilePath} from '../../src/utils/constants'
 
 const touchGitignore = () =>  shell.touch('.gitignore')
 
@@ -114,7 +114,7 @@ describe('init', () => {
     .stdout()
     .command(['init'])
     .it('creates a config.json with the project name', _ctx => {
-      const content = shell.cat(configFilePath).toString()
+      const content = shell.cat(localConfigFilePath).toString()
       const expected = JSON.stringify({name: 'test_root_project'})
 
       expect(content).to.contain(expected)

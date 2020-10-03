@@ -34,6 +34,7 @@ USAGE
 * [`notes init`](#notes-init)
 * [`notes login`](#notes-login)
 * [`notes logout`](#notes-logout)
+* [`notes push`](#notes-push)
 
 ## `notes help [COMMAND]`
 
@@ -75,7 +76,7 @@ USAGE
   $ notes login
 
 OPTIONS
-  -h, --help   show CLI help
+  -h, --help  show CLI help
 ```
 
 _See code: [src/commands/login.ts](https://github.com/edudepetris/notes-cli/blob/v0.0.2/src/commands/login.ts)_
@@ -89,8 +90,22 @@ USAGE
   $ notes logout
 
 OPTIONS
-  -h, --help       show CLI help
+  -h, --help  show CLI help
 ```
 
 _See code: [src/commands/logout.ts](https://github.com/edudepetris/notes-cli/blob/v0.0.2/src/commands/logout.ts)_
+
+## `notes push`
+
+describe the command here
+
+```
+USAGE
+  $ notes push
+
+OPTIONS
+  -h, --help  show CLI help
+```
+
+_See code: [src/commands/push.ts](https://github.com/edudepetris/notes-cli/blob/v0.0.2/src/commands/push.ts)_
 <!-- commandsstop -->

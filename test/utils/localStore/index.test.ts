@@ -8,8 +8,8 @@ describe('localStore', () => {
     project: {
       name: 'dummy',
       id: 101,
-      pushed_at: '2020-10-03T00:12:23.094Z'
-    }
+      pushed_at: '2020-10-03T00:12:23.094Z',
+    },
   }
 
   beforeEach(() => fs.ensureFileSync(configFilePath))
@@ -59,9 +59,9 @@ describe('localStore', () => {
       // We need content on
       // ./devnotes/notes.md
       fs.ensureFileSync(notesFilePath)
-      fs.writeJsonSync(notesFilePath, "# Title")
+      fs.writeJsonSync(notesFilePath, '# Title')
 
-      expect(getNotes()).to.contain("# Title")
+      expect(getNotes()).to.contain('# Title')
     })
   })
 })

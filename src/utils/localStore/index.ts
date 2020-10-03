@@ -1,12 +1,11 @@
 import * as fs from 'fs-extra'
-import { config } from 'shelljs'
 import {configFilePath, notesFilePath} from '../constants'
 
 // wrapper for manipulate data on
 //  .devnotes/config.json
 //  .devnotes/notes.md
 
-const getProject = ():any => {
+const getProject = (): any => {
   fs.ensureFileSync(configFilePath)
 
   const localStoreData = fs.readJsonSync(configFilePath)
@@ -21,7 +20,7 @@ const setProject = (project: any) => {
 
   fs.writeJsonSync(configFilePath, {
     ...data,
-    project: fresh
+    project: fresh,
   })
 
   return fresh
@@ -32,5 +31,5 @@ const getNotes = () => (fs.readFileSync(notesFilePath, 'utf8'))
 export {
   getProject,
   setProject,
-  getNotes
+  getNotes,
 }

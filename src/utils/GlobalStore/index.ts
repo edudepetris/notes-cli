@@ -6,7 +6,7 @@ import {globalConfigFileName} from '../constants'
 //
 //     // initialization.
 //     const store = new GlobalStore(ctx)
-//     await store.init()
+//     store.init()
 //
 class GlobalStore {
   ctx: any
@@ -22,13 +22,13 @@ class GlobalStore {
     )
   }
 
-  async init() {
-    await fs.ensureFile(this.#path)
+  init() {
+    fs.ensureFileSync(this.#path)
   }
 
-  async setAuth(userAuth: any) {
+  setAuth(userAuth: any) {
     try {
-      await fs.writeJson(this.#path, userAuth)
+      fs.writeJsonSync(this.#path, userAuth)
     } catch (error) {
       if (error.code === 'ENOENT') {
         throw new Error('missing call init()')
@@ -40,9 +40,9 @@ class GlobalStore {
     return true
   }
 
-  async getAuth() {
+  getAuth() {
     try {
-      const config = await fs.readJson(this.#path)
+      const config = fs.readJsonSync(this.#path)
 
       return {
         email: config.email,

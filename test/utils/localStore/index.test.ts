@@ -15,7 +15,7 @@ describe('localStore', () => {
   beforeEach(() => fs.ensureFileSync(localConfigFilePath))
 
   describe('getProject', () => {
-    it('returns the project', async () => {
+    it('returns the project', () => {
       // We need dummy data on
       // ./devnotes/config.json
       fs.writeJsonSync(localConfigFilePath, dummy)

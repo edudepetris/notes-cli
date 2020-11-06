@@ -12,10 +12,10 @@ const clean = () => {
 }
 
 const cdProjectTestRoot = () => {
-  process.chdir('test/test_root_project/');
+  process.chdir('test/test_root_project/')
 }
 const cdProjectRoot = () => {
-  process.chdir('../../');
+  process.chdir('../../')
 }
 
 beforeEach(cdProjectTestRoot)

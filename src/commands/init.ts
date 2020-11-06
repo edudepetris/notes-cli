@@ -6,7 +6,7 @@ import {rootDir, notesFilePath, localConfigFilePath} from '../utils/constants'
 
 const checkPermission = (ctx: any) => {
   try {
-    fs.accessSync('.', fs.constants.W_OK)
+    fs.accessSync('.', fs.constants.F_OK & fs.constants.W_OK)
   } catch (_) {
     const workingDir = process.cwd()
     const error = `Permission denied for creation on ${workingDir}`

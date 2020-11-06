@@ -17,6 +17,9 @@ jobs:
       - run: ./bin/run --version
       - run: ./bin/run --help
       - run:
+          name: Folder permission
+          command: chown -R $USER:$USER test/test_root_project/
+      - run:
           name: Testing
           command: yarn test
       - run:

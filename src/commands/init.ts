@@ -1,32 +1,28 @@
 import {Command, flags} from '@oclif/command'
-import * as shell from 'shelljs'
-import * as fs from 'fs'
+import * as fs from 'fs-extra'
 import * as path from 'path'
 
 import {rootDir, notesFilePath, localConfigFilePath} from '../utils/constants'
 
-const SUCCESS = 0
-
 const checkPermission = (ctx: any) => {
   try {
-    fs.accessSync('.', fs.constants.W_OK)
+    fs.accessSync('.', fs.constants.F_OK & fs.constants.W_OK)
   } catch (_) {
-    const pwd = shell.pwd().toString()
-    const error = `Permission denied for creation on ${pwd}`
-    const suggestion = `give write permission to ${pwd}`
+    const workingDir = process.cwd()
+    const error = `Permission denied for creation on ${workingDir}`
+    const suggestion = `give write permission to ${workingDir}`
 
     ctx.error(error, {exit: 1, suggestions: [suggestion]})
   }
 }
 
 const createStructure = () => {
-  shell.mkdir('-p', rootDir)
-  shell.touch(notesFilePath)
-  shell.touch(localConfigFilePath)
+  fs.ensureFileSync(notesFilePath)
+  fs.ensureFileSync(localConfigFilePath)
 }
 
 const identifyProject = () => {
-  const currentPath = shell.pwd().toString()
+  const currentPath = process.cwd()
   const name = currentPath.split(path.sep).pop()
 
   const data = {
@@ -35,25 +31,18 @@ const identifyProject = () => {
     },
   }
 
-  const stringData = JSON.stringify(data)
-
-  const identity = new shell.ShellString(stringData)
-  identity.toEnd(localConfigFilePath)
+  fs.writeJsonSync(localConfigFilePath, data)
 }
 
 const addToGitignore = () => {
-  const hasGitignore = shell.ls('-A', '.gitignore').code === SUCCESS
+  const hasGitignore = fs.pathExistsSync('.gitignore')
 
   if (hasGitignore) {
-    const gitignore = shell.cat('.gitignore').toString()
+    const gitignore = fs.readFileSync('.gitignore', 'utf8')
     const hasDevnotes = gitignore.includes(rootDir)
 
     if (!hasDevnotes) {
-      const newLine = new shell.ShellString('\n')
-      const toIgnore = new shell.ShellString(rootDir)
-
-      newLine.toEnd('.gitignore')
-      toIgnore.toEnd('.gitignore')
+      fs.appendFileSync('.gitignore', rootDir)
     }
   }
 }

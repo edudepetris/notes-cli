@@ -6,7 +6,6 @@ import {globalConfigFileName} from '../constants'
 //
 //     // initialization.
 //     const store = new GlobalStore(ctx)
-//     store.init()
 //
 class GlobalStore {
   ctx: any
@@ -20,9 +19,12 @@ class GlobalStore {
       this.ctx.config.configDir,
       globalConfigFileName,
     )
+
+    this.init()
   }
 
-  init() {
+  // https://github.com/microsoft/TypeScript/issues/37677
+  private init() {
     // Crate a empty json file iff it doesn't exists.
     const exists = fs.pathExistsSync(this.#path)
     if (!exists) {

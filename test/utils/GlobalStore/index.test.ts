@@ -17,16 +17,20 @@ describe('GlobalStore', () => {
   const data = {email: 'yoda@devnotes.com', token: 'token'}
 
   beforeEach(() => {
-    fs.emptyDirSync('../test_root_project/')
+    fs.emptyDirSync(process.cwd())
   })
 
-  describe('#init', () => {
-    it('ensures a global config file', () => {
-      const store = new GlobalStore(ctx)
-      store.init()
-      const exists = fs.pathExistsSync(configPath)
+  afterEach(() => {
+    fs.emptyDirSync(process.cwd())
+  })
 
-      expect(exists).to.be.true
+  describe('constructor', () => {
+    it('ensures a global config file', () => {
+      // eslint-disable-next-line no-new
+      new GlobalStore(ctx)
+      const content = fs.readJSONSync(configPath)
+
+      expect(content).to.include({})
     })
   })
 
@@ -34,7 +38,6 @@ describe('GlobalStore', () => {
     describe('#setAuth', () => {
       it('saves data in global config file', () => {
         const store = new GlobalStore(ctx)
-        store.init()
         store.setAuth(data)
 
         const {user} = fs.readJSONSync(configPath)
@@ -43,22 +46,9 @@ describe('GlobalStore', () => {
       })
       it('returs true when success', () => {
         const store = new GlobalStore(ctx)
-        store.init()
         const result = store.setAuth(data)
 
         expect(result).to.be.true
-      })
-      it('throws an err when missing init()', () => {
-        const store = new GlobalStore(ctx)
-        let msg = ''
-
-        try {
-          store.setAuth(data)
-        } catch (error) {
-          msg = error.message
-        }
-
-        expect(msg).to.be.eq('missing call init()')
       })
     })
 
@@ -67,7 +57,6 @@ describe('GlobalStore', () => {
         fs.outputJSONSync(configPath, {user: data})
 
         const store = new GlobalStore(ctx)
-        store.init()
         const result = store.getAuth()
 
         expect(result).to.include(data)
@@ -77,24 +66,9 @@ describe('GlobalStore', () => {
         fs.outputJSONSync(configPath, {})
 
         const store = new GlobalStore(ctx)
-        store.init()
         const result = store.getAuth()
 
         expect(result).to.include({email: undefined, token: undefined})
-      })
-
-      it('throws an erro when missing init()', () => {
-        const store = new GlobalStore(ctx)
-
-        let msg = ''
-
-        try {
-          store.getAuth()
-        } catch (error) {
-          msg = error.message
-        }
-
-        expect(msg).to.be.eq('missing call init()')
       })
     })
   })

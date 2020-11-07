@@ -22,7 +22,6 @@ export default class Push extends Command {
     cli.action.start('Pushing')
 
     const gstore = new GlobalStore(this)
-    gstore.init()
 
     const {email, token} = gstore.getAuth()
     const isLoggedIn = email && token

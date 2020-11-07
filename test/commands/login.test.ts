@@ -15,7 +15,6 @@ describe('login', () => {
     .command(['login'])
     .it('saves user credentials', ctx => {
       const store = new GlobalStore(ctx)
-      store.init()
       const auth = store.getAuth()
 
       expect(auth).to.include({email: 'yoda@devnotes.com', token: 'token'})

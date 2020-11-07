@@ -1,6 +1,4 @@
 import {expect} from '@oclif/test'
-import * as sinon from 'sinon'
-
 import GlobalStore from '../../../src/utils/GlobalStore'
 import {globalConfigFileName} from '../../../src/utils/constants'
 
@@ -19,16 +17,20 @@ describe('GlobalStore', () => {
   const data = {email: 'yoda@devnotes.com', token: 'token'}
 
   beforeEach(() => {
-    fs.emptyDirSync('../test_root_project/')
+    fs.emptyDirSync(process.cwd())
   })
 
-  describe('#init', () => {
-    it('ensures a global config file', () => {
-      const store = new GlobalStore(ctx)
-      store.init()
-      const exists = fs.pathExistsSync(configPath)
+  afterEach(() => {
+    fs.emptyDirSync(process.cwd())
+  })
 
-      expect(exists).to.be.true
+  describe('constructor', () => {
+    it('ensures a global config file', () => {
+      // eslint-disable-next-line no-new
+      new GlobalStore(ctx)
+      const content = fs.readJSONSync(configPath)
+
+      expect(content).to.include({})
     })
   })
 
@@ -36,60 +38,37 @@ describe('GlobalStore', () => {
     describe('#setAuth', () => {
       it('saves data in global config file', () => {
         const store = new GlobalStore(ctx)
-        store.init()
         store.setAuth(data)
 
-        const {email, token} = fs.readJSONSync(configPath)
-
-        expect(email).to.be.equal(data.email)
-        expect(token).to.be.equal(data.token)
+        const {user} = fs.readJSONSync(configPath)
+        expect(user.email).to.be.equal(data.email)
+        expect(user.token).to.be.equal(data.token)
       })
       it('returs true when success', () => {
         const store = new GlobalStore(ctx)
-        store.init()
         const result = store.setAuth(data)
 
         expect(result).to.be.true
-      })
-      it('throws an err when missing init()', () => {
-        const store = new GlobalStore(ctx)
-        let msg = ''
-
-        try {
-          store.setAuth(data)
-        } catch (error) {
-          msg = error.message
-        }
-
-        expect(msg).to.be.eq('missing call init()')
       })
     })
 
     describe('#getAuth', () => {
       it('returns from global config file', () => {
-        sinon.stub(fs, 'readJsonSync').returns(data)
+        fs.outputJSONSync(configPath, {user: data})
 
         const store = new GlobalStore(ctx)
-        store.init()
         const result = store.getAuth()
 
         expect(result).to.include(data)
-
-        sinon.restore()
       })
 
-      it('throws an erro when missing init()', () => {
+      it('returns blank when the file is empty', () => {
+        fs.outputJSONSync(configPath, {})
+
         const store = new GlobalStore(ctx)
+        const result = store.getAuth()
 
-        let msg = ''
-
-        try {
-          store.getAuth()
-        } catch (error) {
-          msg = error.message
-        }
-
-        expect(msg).to.be.eq('missing call init()')
+        expect(result).to.include({email: undefined, token: undefined})
       })
     })
   })

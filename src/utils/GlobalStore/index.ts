@@ -6,7 +6,6 @@ import {globalConfigFileName} from '../constants'
 //
 //     // initialization.
 //     const store = new GlobalStore(ctx)
-//     store.init()
 //
 class GlobalStore {
   ctx: any
@@ -20,15 +19,29 @@ class GlobalStore {
       this.ctx.config.configDir,
       globalConfigFileName,
     )
+
+    this.init()
   }
 
-  init() {
-    fs.ensureFileSync(this.#path)
+  // https://github.com/microsoft/TypeScript/issues/37677
+  private init() {
+    // Crate a empty json file iff it doesn't exists.
+    const exists = fs.pathExistsSync(this.#path)
+    if (!exists) {
+      fs.outputJsonSync(this.#path, {})
+    }
   }
 
-  setAuth(userAuth: any) {
+  setAuth(userAuth: {email: string; token: string}): boolean {
     try {
-      fs.writeJsonSync(this.#path, userAuth)
+      const config = fs.readJsonSync(this.#path)
+      const user = {...config.user, ...userAuth}
+      const data = {
+        ...config,
+        user,
+      }
+
+      fs.writeJsonSync(this.#path, data)
     } catch (error) {
       if (error.code === 'ENOENT') {
         throw new Error('missing call init()')
@@ -40,13 +53,13 @@ class GlobalStore {
     return true
   }
 
-  getAuth() {
+  getAuth(): {email: string; token: string} {
     try {
-      const config = fs.readJsonSync(this.#path)
+      const {user} = fs.readJsonSync(this.#path)
 
       return {
-        email: config.email,
-        token: config.token,
+        email: (user && user.email),
+        token: (user && user.token),
       }
     } catch (error) {
       if (error.code === 'ENOENT') {

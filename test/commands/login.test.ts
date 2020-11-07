@@ -13,10 +13,10 @@ describe('login', () => {
     .stub(cli, 'prompt', () => async () => 'yoda@devnotes.com')
     .stub(api, 'login', () => (success))
     .command(['login'])
-    .it('saves user credentials', async ctx => {
+    .it('saves user credentials', ctx => {
       const store = new GlobalStore(ctx)
-      await store.init()
-      const auth = await store.getAuth()
+      store.init()
+      const auth = store.getAuth()
 
       expect(auth).to.include({email: 'yoda@devnotes.com', token: 'token'})
     })

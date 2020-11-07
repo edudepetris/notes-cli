@@ -18,17 +18,15 @@ const configPath = path.join(ctx.config.configDir, globalConfigFileName)
 describe('GlobalStore', () => {
   const data = {email: 'yoda@devnotes.com', token: 'token'}
 
-  beforeEach(async () => {
-    try {
-      await fs.emptyDir('../test_root_project/')
-    } catch {}
+  beforeEach(() => {
+    fs.emptyDirSync('../test_root_project/')
   })
 
   describe('#init', () => {
-    it('ensures a global config file', async () => {
+    it('ensures a global config file', () => {
       const store = new GlobalStore(ctx)
-      await store.init()
-      const exists = await fs.pathExists(configPath)
+      store.init()
+      const exists = fs.pathExistsSync(configPath)
 
       expect(exists).to.be.true
     })
@@ -36,29 +34,29 @@ describe('GlobalStore', () => {
 
   context('User auth', () => {
     describe('#setAuth', () => {
-      it('saves data in global config file', async () => {
+      it('saves data in global config file', () => {
         const store = new GlobalStore(ctx)
-        await store.init()
-        await store.setAuth(data)
+        store.init()
+        store.setAuth(data)
 
-        const {email, token} = await fs.readJSON(configPath)
+        const {email, token} = fs.readJSONSync(configPath)
 
         expect(email).to.be.equal(data.email)
         expect(token).to.be.equal(data.token)
       })
-      it('returs true when success', async () => {
+      it('returs true when success', () => {
         const store = new GlobalStore(ctx)
-        await store.init()
-        const result = await store.setAuth(data)
+        store.init()
+        const result = store.setAuth(data)
 
         expect(result).to.be.true
       })
-      it('throws an err when missing init()', async () => {
+      it('throws an err when missing init()', () => {
         const store = new GlobalStore(ctx)
         let msg = ''
 
         try {
-          await store.setAuth(data)
+          store.setAuth(data)
         } catch (error) {
           msg = error.message
         }
@@ -68,25 +66,25 @@ describe('GlobalStore', () => {
     })
 
     describe('#getAuth', () => {
-      it('returns from global config file', async () => {
-        sinon.stub(fs, 'readJson').resolves(data)
+      it('returns from global config file', () => {
+        sinon.stub(fs, 'readJsonSync').returns(data)
 
         const store = new GlobalStore(ctx)
-        await store.init()
-        const result = await store.getAuth()
+        store.init()
+        const result = store.getAuth()
 
         expect(result).to.include(data)
 
         sinon.restore()
       })
 
-      it('throws an erro when missing init()', async () => {
+      it('throws an erro when missing init()', () => {
         const store = new GlobalStore(ctx)
 
         let msg = ''
 
         try {
-          await store.getAuth()
+          store.getAuth()
         } catch (error) {
           msg = error.message
         }

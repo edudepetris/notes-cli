@@ -13,16 +13,16 @@ const signIn = () => {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  sinon.stub(GlobalStore.prototype, 'init').callsFake(async () => {})
-  sinon.stub(GlobalStore.prototype, 'getAuth').callsFake(async () => auth)
+  sinon.stub(GlobalStore.prototype, 'init').callsFake(() => {})
+  sinon.stub(GlobalStore.prototype, 'getAuth').callsFake(() => auth)
 }
 
 const signOut = () => {
   const auth = {email: '', token: ''}
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  sinon.stub(GlobalStore.prototype, 'init').callsFake(async () => {})
-  sinon.stub(GlobalStore.prototype, 'getAuth').callsFake(async () => auth)
+  sinon.stub(GlobalStore.prototype, 'init').callsFake(() => {})
+  sinon.stub(GlobalStore.prototype, 'getAuth').callsFake(() => auth)
 }
 
 const createDummyProject = (opts?: any) => {

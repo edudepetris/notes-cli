@@ -1,6 +1,4 @@
 import {expect} from '@oclif/test'
-import * as sinon from 'sinon'
-
 import GlobalStore from '../../../src/utils/GlobalStore'
 import {globalConfigFileName} from '../../../src/utils/constants'
 
@@ -39,10 +37,9 @@ describe('GlobalStore', () => {
         store.init()
         store.setAuth(data)
 
-        const {email, token} = fs.readJSONSync(configPath)
-
-        expect(email).to.be.equal(data.email)
-        expect(token).to.be.equal(data.token)
+        const {user} = fs.readJSONSync(configPath)
+        expect(user.email).to.be.equal(data.email)
+        expect(user.token).to.be.equal(data.token)
       })
       it('returs true when success', () => {
         const store = new GlobalStore(ctx)
@@ -67,15 +64,23 @@ describe('GlobalStore', () => {
 
     describe('#getAuth', () => {
       it('returns from global config file', () => {
-        sinon.stub(fs, 'readJsonSync').returns(data)
+        fs.outputJSONSync(configPath, {user: data})
 
         const store = new GlobalStore(ctx)
         store.init()
         const result = store.getAuth()
 
         expect(result).to.include(data)
+      })
 
-        sinon.restore()
+      it('returns blank when the file is empty', () => {
+        fs.outputJSONSync(configPath, {})
+
+        const store = new GlobalStore(ctx)
+        store.init()
+        const result = store.getAuth()
+
+        expect(result).to.include({email: undefined, token: undefined})
       })
 
       it('throws an erro when missing init()', () => {

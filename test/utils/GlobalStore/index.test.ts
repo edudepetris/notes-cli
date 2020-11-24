@@ -17,11 +17,11 @@ describe('GlobalStore', () => {
   const data = {email: 'yoda@devnotes.com', token: 'token'}
 
   beforeEach(() => {
-    fs.emptyDirSync(process.cwd())
+    fs.emptyDirSync(`${process.cwd()}/global_config`)
   })
 
   afterEach(() => {
-    fs.emptyDirSync(process.cwd())
+    fs.emptyDirSync(`${process.cwd()}/global_config`)
   })
 
   describe('constructor', () => {

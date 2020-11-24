@@ -1,7 +1,5 @@
-notes-cli
+💻 Devnotes CLI
 =========
-
-
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![Version](https://img.shields.io/npm/v/notes-cli.svg)](https://npmjs.org/package/notes-cli)
@@ -10,102 +8,17 @@ notes-cli
 [![Downloads/week](https://img.shields.io/npm/dw/notes-cli.svg)](https://npmjs.org/package/notes-cli)
 [![License](https://img.shields.io/npm/l/notes-cli.svg)](https://github.com/edudepetris/notes-cli/blob/master/package.json)
 
-<!-- toc -->
-* [Usage](#usage)
-* [Commands](#commands)
-<!-- tocstop -->
-# Usage
-<!-- usage -->
+* [Setup](#setup)
+* [Starting up](#starting-up)
+* [Usage and Commands](doc/commands.md)
+
+# Setup
 ```sh-session
-$ npm install -g devnotes-cli
-$ notes COMMAND
-running command...
-$ notes (-v|--version|version)
-devnotes-cli/0.0.2 darwin-x64 node-v12.18.0
-$ notes --help [COMMAND]
-USAGE
-  $ notes COMMAND
-...
-```
-<!-- usagestop -->
-# Commands
-<!-- commands -->
-* [`notes help [COMMAND]`](#notes-help-command)
-* [`notes init`](#notes-init)
-* [`notes login`](#notes-login)
-* [`notes logout`](#notes-logout)
-* [`notes push`](#notes-push)
-
-## `notes help [COMMAND]`
-
-display help for notes
-
-```
-USAGE
-  $ notes help [COMMAND]
-
-ARGUMENTS
-  COMMAND  command to show help for
-
-OPTIONS
-  --all  see all commands in CLI
+$ yarn
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.0/src/commands/help.ts)_
-
-## `notes init`
-
-Create an empty Notes repository or reinitialize an existing one.
-
+# Starting Up
+```sh-session
+$ yarn test
+$ ./bin/run [COMMAND]
 ```
-USAGE
-  $ notes init
-
-OPTIONS
-  -h, --help  show CLI help
-```
-
-_See code: [src/commands/init.ts](https://github.com/edudepetris/notes-cli/blob/v0.0.2/src/commands/init.ts)_
-
-## `notes login`
-
-login with yours Devnotes credentials
-
-```
-USAGE
-  $ notes login
-
-OPTIONS
-  -h, --help  show CLI help
-```
-
-_See code: [src/commands/login.ts](https://github.com/edudepetris/notes-cli/blob/v0.0.2/src/commands/login.ts)_
-
-## `notes logout`
-
-clears local login credentials and invalidates API session
-
-```
-USAGE
-  $ notes logout
-
-OPTIONS
-  -h, --help  show CLI help
-```
-
-_See code: [src/commands/logout.ts](https://github.com/edudepetris/notes-cli/blob/v0.0.2/src/commands/logout.ts)_
-
-## `notes push`
-
-describe the command here
-
-```
-USAGE
-  $ notes push
-
-OPTIONS
-  -h, --help  show CLI help
-```
-
-_See code: [src/commands/push.ts](https://github.com/edudepetris/notes-cli/blob/v0.0.2/src/commands/push.ts)_
-<!-- commandsstop -->

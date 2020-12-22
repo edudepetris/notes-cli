@@ -22,3 +22,11 @@ $ yarn
 $ yarn test
 $ ./bin/run [COMMAND]
 ```
+
+### With local server
+- start the server as https://github.com/edudepetris/devnotes#starting-up
+
+```sh-session
+$ export APP_ENV=development # to connect with local server.
+$ ./bin/run [COMMAND]
+```

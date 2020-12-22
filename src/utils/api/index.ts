@@ -1,10 +1,11 @@
 import axios from 'axios'
 
+
 const baseUrl = () => {
-  const port = 3000
-  // on the build process we can add a ENV variable
-  // for the endpoint.
-  return `http://localhost:${port}/api/`
+  const development = process.env.APP_ENV === 'development'
+  const base = development ? 'http://localhost:3000' : 'https://glacial-shelf-79171.herokuapp.com'
+
+  return `${base}/api/`
 }
 
 const defaultHeaders = () => ({

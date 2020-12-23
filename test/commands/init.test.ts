@@ -34,7 +34,7 @@ describe('init', () => {
   .it('notes.md has a basic template', _ctx => {
     const content = fs.readFileSync(notesFilePath, 'utf8')
 
-    expect(content).to.contain('')
+    expect(content).to.contain('# Devnotes')
   })
 
   context('when .gitignore exists', () => {

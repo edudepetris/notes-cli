@@ -21,6 +21,14 @@ const createStructure = () => {
   fs.ensureFileSync(localConfigFilePath)
 }
 
+const addTemplate = () => {
+  const content = fs.readFileSync(notesFilePath, 'utf8')
+
+  if (content.length === 0) {
+    fs.writeFileSync(notesFilePath, '# Devnotes')
+  }
+}
+
 const identifyProject = () => {
   const currentPath = process.cwd()
   const name = currentPath.split(path.sep).pop()
@@ -57,6 +65,7 @@ export default class Init extends Command {
   async run() {
     checkPermission(this)
     createStructure()
+    addTemplate()
     identifyProject()
     addToGitignore()
 

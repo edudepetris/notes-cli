@@ -42,7 +42,7 @@ const addToGitignore = () => {
     const hasDevnotes = gitignore.includes(rootDir)
 
     if (!hasDevnotes) {
-      fs.appendFileSync('.gitignore', rootDir)
+      fs.appendFileSync('.gitignore', `\n${rootDir}`)
     }
   }
 }

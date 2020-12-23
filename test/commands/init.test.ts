@@ -44,7 +44,7 @@ describe('init', () => {
     .it('adds .devnotes to .gitignore', _ctx => {
       const content = fs.readFileSync('.gitignore', 'utf8')
 
-      expect(content).to.contain(rootDir)
+      expect(content).to.contain(`\n${rootDir}`)
     })
   })
 

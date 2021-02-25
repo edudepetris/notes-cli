@@ -1,6 +1,6 @@
 {
   "name": "devnotes-cli",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "author": "Edu Depetris @edudepetris",
   "bin": {
     "notes": "./bin/run"

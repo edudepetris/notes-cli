@@ -9,6 +9,7 @@
   "dependencies": {
     "@oclif/command": "^1",
     "@oclif/config": "^1",
+    "@oclif/plugin-autocomplete": "^0.3.0",
     "@oclif/plugin-help": "^3",
     "@oclif/plugin-not-found": "^1.2.4",
     "axios": "^0.20.0",
@@ -64,7 +65,7 @@
     },
     "macos": {
       "identifier": "com.devnotes.cli",
-      "sign": "Eduardo Depetris"
+      "sign": "Developer ID Installer: Eduardo Depetris (PUTV79YVYP)"
     }
   },
   "repository": "edudepetris/notes-cli",

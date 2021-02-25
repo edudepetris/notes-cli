@@ -56,7 +56,8 @@
     "bin": "notes",
     "plugins": [
       "@oclif/plugin-help",
-      "@oclif/plugin-not-found"
+      "@oclif/plugin-not-found",
+      "@oclif/plugin-autocomplete"
     ],
     "update": {
       "s3": {

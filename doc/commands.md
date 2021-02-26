@@ -1,25 +1,33 @@
-Usage and Commands
+Usage
 =========
 
-### Usage
+Homebrew
+
+```sh-session
+$ brew install edudepetris/homebrew-brew/devnotes
+```
+
+NPM
 ```sh-session
 $ npm install -g devnotes-cli
 ```
 
-### Commands
-* [`notes help [COMMAND]`](#notes-help-command)
-* [`notes init`](#notes-init)
-* [`notes login`](#notes-login)
-* [`notes logout`](#notes-logout)
-* [`notes push`](#notes-push)
+Commands
+=========
 
-## `notes help [COMMAND]`
+* [`devnotes help [COMMAND]`](#devnotes-help-command)
+* [`devnotes init`](#devnotes-init)
+* [`devnotes login`](#devnotes-login)
+* [`devnotes logout`](#devnotes-logout)
+* [`devnotes push`](#devnotes-push)
 
-display help for notes
+## `devnotes help [COMMAND]`
+
+display help for devnotes
 
 ```
 USAGE
-  $ notes help [COMMAND]
+  $ devnotes help [COMMAND]
 
 ARGUMENTS
   COMMAND  command to show help for
@@ -28,61 +36,43 @@ OPTIONS
   --all  see all commands in CLI
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.0/src/commands/help.ts)_
+## `devnotes init`
 
-## `notes init`
-
-Create an empty Notes repository or reinitialize an existing one.
+create an empty Devnotes repository or reinitialize an existing one.
 
 ```
 USAGE
-  $ notes init
+  $ devnotes init
 
-OPTIONS
-  -h, --help  show CLI help
 ```
 
-_See code: [src/commands/init.ts](https://github.com/edudepetris/notes-cli/blob/v0.0.2/src/commands/init.ts)_
-
-## `notes login`
+## `devnotes login`
 
 login with yours Devnotes credentials
 
 ```
 USAGE
-  $ notes login
+  $ devnotes login
 
-OPTIONS
-  -h, --help  show CLI help
 ```
 
-_See code: [src/commands/login.ts](https://github.com/edudepetris/notes-cli/blob/v0.0.2/src/commands/login.ts)_
-
-## `notes logout`
+## `devnotes logout`
 
 clears local login credentials and invalidates API session
 
 ```
 USAGE
-  $ notes logout
+  $ devnotes logout
 
-OPTIONS
-  -h, --help  show CLI help
 ```
 
-_See code: [src/commands/logout.ts](https://github.com/edudepetris/notes-cli/blob/v0.0.2/src/commands/logout.ts)_
+## `devnotes push`
 
-## `notes push`
-
-describe the command here
+push the content of your notes to your Devnotes' account.
 
 ```
 USAGE
-  $ notes push
+  $ devnotes push
 
-OPTIONS
-  -h, --help  show CLI help
 ```
-
-_See code: [src/commands/push.ts](https://github.com/edudepetris/notes-cli/blob/v0.0.2/src/commands/push.ts)_
 <!-- commandsstop -->

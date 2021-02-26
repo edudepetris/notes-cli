@@ -3,7 +3,7 @@
   "version": "0.0.4",
   "author": "Edu Depetris @edudepetris",
   "bin": {
-    "notes": "./bin/run"
+    "devnotes": "./bin/run"
   },
   "bugs": "https://github.com/edudepetris/notes-cli/issues",
   "dependencies": {
@@ -53,7 +53,7 @@
   "main": "lib/index.js",
   "oclif": {
     "commands": "./lib/commands",
-    "bin": "notes",
+    "bin": "devnotes",
     "plugins": [
       "@oclif/plugin-help",
       "@oclif/plugin-not-found",

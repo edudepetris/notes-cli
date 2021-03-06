@@ -45,7 +45,7 @@
     "/npm-shrinkwrap.json",
     "/oclif.manifest.json"
   ],
-  "homepage": "https://github.com/edudepetris/notes-cli",
+  "homepage": "https://edudepetris.github.io/devnotes.github.io/",
   "keywords": [
     "oclif"
   ],
@@ -64,10 +64,6 @@
         "bucket": "devnotes-cli"
       }
     },
-    "macos": {
-      "identifier": "com.devnotes.cli",
-      "sign": "Developer ID Installer: Eduardo Depetris (PUTV79YVYP)"
-    }
   },
   "repository": "edudepetris/notes-cli",
   "scripts": {

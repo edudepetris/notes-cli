@@ -63,7 +63,7 @@
       "s3": {
         "bucket": "devnotes-cli"
       }
-    },
+    }
   },
   "repository": "edudepetris/notes-cli",
   "scripts": {

@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const baseUrl = () => {
   const development = process.env.APP_ENV === 'development'
-  const base = development ? 'http://localhost:3000' : 'https://glacial-shelf-79171.herokuapp.com'
+  const base = development ? 'http://localhost:3000' : 'https://devnotes-staging.herokuapp.com'
 
   return `${base}/api/`
 }

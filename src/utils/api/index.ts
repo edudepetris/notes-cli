@@ -28,7 +28,7 @@ const login = (user: any) => (axios.post('/v1/users/sign_in', user))
 const logout = (headers: any) => (axios.delete('/v1/users/sign_out', {headers}))
 
 const create = (data: any, headers: any) => (axios.post('/v1/user/notes', data, {headers}))
-const update = (id: string, data: any, headers: any) => (axios.post(`/v1/user/notes/${id}`, data, {headers}))
+const update = (id: string, data: any, headers: any) => (axios.put(`/v1/user/notes/${id}`, data, {headers}))
 
 export {
   login,

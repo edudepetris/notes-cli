@@ -56,7 +56,7 @@ const addToGitignore = () => {
 }
 
 export default class Init extends Command {
-  static description = 'Create an empty Notes repository or reinitialize an existing one.'
+  static description = 'Create an empty Devnotes repository or reinitialize an existing one.'
 
   static flags = {
     help: flags.help({char: 'h'}),

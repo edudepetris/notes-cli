@@ -28,7 +28,7 @@ export default class Push extends Command {
 
     if (!isLoggedIn) {
       this.warn('login is required')
-      this.warn('$ notes login')
+      this.warn('$ devnotes login')
       this.exit(1)
     }
 

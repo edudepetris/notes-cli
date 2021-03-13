@@ -23,10 +23,7 @@ $ yarn test
 $ ./bin/run [COMMAND]
 ```
 
-### With local server
-- start the server as https://github.com/edudepetris/devnotes#starting-up
-
-```sh-session
-$ export APP_ENV=development # to connect with local server.
-$ ./bin/run [COMMAND]
-```
+### Connect with Devnotes server
+Commands like `login`, `logout` and `push` interact with a Devnotes server.  
+By default it's connected to a local server _http://localhost:3000_.  
+Start the server as https://github.com/edudepetris/devnotes#starting-up

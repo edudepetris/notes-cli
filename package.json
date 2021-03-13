@@ -12,7 +12,7 @@
     "@oclif/plugin-autocomplete": "^0.3.0",
     "@oclif/plugin-help": "^3",
     "@oclif/plugin-not-found": "^1.2.4",
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "fs-extra": "^9.0.1",
     "tslib": "^1"
   },

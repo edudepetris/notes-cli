@@ -21,7 +21,7 @@
     "@oclif/test": "^1",
     "@types/chai": "^4",
     "@types/fs-extra": "^9.0.1",
-    "@types/mocha": "^5",
+    "@types/mocha": "^8",
     "@types/node": "^14.14.9",
     "aws-sdk": "^2.747.0",
     "chai": "^4",

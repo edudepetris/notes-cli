@@ -1,0 +1,11 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: monthly
+  target-branch: master
+  ignore:
+  - dependency-name: y18n
+    versions:
+    - 4.0.3

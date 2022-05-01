@@ -23,7 +23,7 @@
     "@types/fs-extra": "^9.0.11",
     "@types/mocha": "^8",
     "@types/node": "^15.0.3",
-    "aws-sdk": "^2.747.0",
+    "aws-sdk": "^2.1125.0",
     "chai": "^4",
     "eslint": "^7.26.0",
     "eslint-config-oclif": "^3.1",
